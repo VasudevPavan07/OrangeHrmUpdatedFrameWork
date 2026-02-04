@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+<listeners>
+<listener class-name="com.orangeHrm.genericUtility.ListnerImplementation"></listener>
+</listeners>
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="orangeHRMTestScripts.EditMyInfoDetailsTest"/>
+      <class name="orangeHRMTestScripts.AddEmployeeTest"/>
+      <class name="orangeHRMTestScripts.CreateUserTest"/>
+      <class name="orangeHRMTestScripts.AddTerminationReasonTest"/>
+      <class name="orangeHRMTestScripts.AddCandidatesInRecruitmentTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

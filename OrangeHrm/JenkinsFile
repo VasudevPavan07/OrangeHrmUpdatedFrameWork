@@ -1,0 +1,71 @@
+pipeline{
+
+agent any
+
+stages{
+
+stage ('Checkout'){
+       
+       steps{
+          
+           checkout scm
+      
+}     
+
+   
+}
+
+stage('Build'){
+ steps { 
+    dir(Orangehrm){
+ bat 'mvn clean compile -DskipTests'
+}
+   }
+}
+
+
+stage('Test'){
+  steps {
+  dir('OrangeHrm'){
+catchError(buildResult: 'UNSTABLE' ,stageResult: 'FAILURE') { bat 'mvn test'}
+}
+
+
+}
+
+}
+
+stage('Report'){
+  steps {
+   junit allowEmptyResults :true, testResults :'OrangeHrm/target/surefire-reports/*.xml'
+archiveArtifacts artifacts :'OrangeHrm/target/**' , allowEmptyArchive :true}
+}
+
+}
+
+}
+post {
+ always {
+     echo 'Pipeline finished'
+    
+ }
+
+success {
+echo 'All tests passed'}
+
+failure {
+echo 'Pipeline failed. Check the console output.'}
+
+unstable {
+ echo 'Build ran, but some tests failed.' 
+}
+
+
+
+}
+
+
+
+}
+
+

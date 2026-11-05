@@ -17,7 +17,7 @@ stage ('Checkout'){
 
 stage('Build'){
  steps { 
-    dir(Orangehrm){
+    dir('OrangeHrm'){
  bat 'mvn clean compile -DskipTests'
 }
    }
